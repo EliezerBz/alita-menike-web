@@ -122,16 +122,20 @@ h1, h2 {
 
 
 .hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background:
-    linear-gradient(
-      rgba(0,0,0,.65),
-      rgba(0,0,0,.65)
-    ),
-    url('../img/hero.jpg') center/cover;
-  padding: 200px 0 160px; /* antes 140px */
-  margin-top: 0;
-  color: white;
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+    url('../img/hero.jpg') center / cover no-repeat;
+
   text-align: center;
+  color: white;
 }
 
 .hero h1 {
@@ -310,7 +314,7 @@ section h2 {
 
 .about img {
   width: 100%;
-  height: 360px;
+  height: 100%;
   object-fit: cover;
   border-radius: 25px;
   box-shadow: 0 20px 40px rgba(0,0,0,.25);
@@ -443,9 +447,10 @@ section h2 {
 
 /* GRID DE VIDEOS */
 .videos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  gap: 40px;
+  justify-content: center; /* 👈 CLAVE */
 }
 
 /* TARJETA DE VIDEO */
@@ -463,7 +468,8 @@ section h2 {
 
 .video-card iframe {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9; /* 👈 NO height fijo */
+  height: auto;
 }
 
 /* CTA YOUTUBE */
@@ -828,3 +834,238 @@ section h2 {
   opacity: 0.7;
 }
 
+/* =====================================================
+   RESPONSIVE DEFINITIVO – TODOS LOS DISPOSITIVOS
+===================================================== */
+
+/* --------- BASE FLUIDA --------- */
+html {
+  font-size: clamp(14px, 1.2vw, 16px);
+}
+
+img, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------- HERO --------- */
+.hero {
+  min-height: 100vh;
+  padding-top: clamp(140px, 20vh, 220px);
+  padding-bottom: clamp(100px, 15vh, 160px);
+}
+
+.hero-logo {
+  font-size: clamp(36px, 6vw, 56px);
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 52px);
+}
+
+.hero p {
+  font-size: clamp(16px, 2.5vw, 19px);
+}
+
+/* --------- NAVBAR --------- */
+@media (max-width: 900px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+
+/* --------- GRIDS GENERALES --------- */
+@media (max-width: 1024px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* --------- ABOUT --------- */
+@media (max-width: 768px) {
+  .about .container {
+    padding: 40px 25px;
+    border-radius: 30px;
+  }
+
+  .about img {
+    height: auto;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+
+  .about-highlight {
+    font-size: 20px;
+  }
+}
+
+/* --------- CARDS --------- */
+@media (max-width: 600px) {
+  .card {
+    font-size: 16px;
+    padding: 22px;
+  }
+}
+
+/* --------- GALERÍA --------- */
+@media (max-width: 600px) {
+  .gallery {
+    padding: 70px 0;
+  }
+
+  .gallery-grid img {
+    height: 220px;
+  }
+}
+
+/* --------- VIDEOS --------- */
+@media (max-width: 768px) {
+  .videos {
+    padding: 70px 0;
+  }
+
+  .video-card iframe {
+    height: 190px;
+  }
+}
+
+/* --------- BOTONES FLOTANTES --------- */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 54px;
+    height: 54px;
+    right: 15px;
+    bottom: 20px;
+  }
+
+  #music-toggle {
+    right: 15px;
+    bottom: 85px;
+  }
+}
+
+/* --------- FOOTER --------- */
+@media (max-width: 600px) {
+  .footer-brand strong {
+    font-size: 20px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+  }
+
+  .footer-socials {
+    gap: 14px;
+  }
+}
+
+/* --------- TELÓN (MÓVIL) --------- */
+@media (max-width: 768px) {
+  #circus-intro {
+    display: none;
+  }
+}
+
+/* --------- ULTRAWIDE (MONITORES GRANDES) --------- */
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .hero h1 {
+    font-size: 58px;
+  }
+
+  .hero-logo {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    transform: translateY(12px);
+  }
+
+  .nav-links {
+    display: none; /* opcional: menú hamburguesa después */
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+}
+
+/* =====================================================
+   FIX RESPONSIVO SOBRE NOSOTROS (MÓVIL PRO)
+===================================================== */
+@media (max-width: 768px) {
+
+  /* Contenedor más limpio */
+  .about .container {
+    padding: 30px 22px;
+    border-radius: 24px;
+  }
+
+  /* Grid en una sola columna */
+  .about .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* Título más compacto */
+  .about h2 {
+    font-size: 28px;
+    margin-bottom: 18px;
+  }
+
+  /* Texto MÁS legible */
+  .about p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  /* Imagen protagonista */
+  .about img {
+    order: -1;                 /* 👈 SUBE LA IMAGEN */
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 10px;
+    height: auto;
+    border-radius: 22px;
+  }
+
+  /* Destacado menos agresivo */
+  .about-highlight {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  /* Features en tarjetas limpias */
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .about-features .card {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+
+  /* CTA más compacto */
+  .about-cta {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
